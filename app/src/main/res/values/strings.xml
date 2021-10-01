@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name" translatable="false">Music Shop</string>
+    <string name="enter_your_name" translatable="false">Enter your name.</string>
+    <string name="music_shop_label" translatable="false">music shop label</string>
+    <string name="sale_30" translatable="false">Sale 30%</string>
+    <string name="select_item" translatable="false">Select item</string>
+    <string name="active_goods" translatable="false">active goods</string>
+    <string name="order_price">Order price</string>
+    <string name="price" translatable="false">0</string>
+    <string name="currency" translatable="false">$</string>
+    <string name="quantity">Quantity</string>
+    <string name="button_plus" translatable="false">+</string>
+    <string name="total_price" translatable="false">0</string>
+    <string name="button_minus" translatable="false">-</string>
+    <string name="add_to_cart" translatable="false">Add to cart</string>
+</resources>

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModelOrder"
+            type="com.friden.ru.musicshop.ViewModelOrder" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
+
+        <EditText
+            android:id="@+id/editTextTextPersonName"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:autofillHints="name"
+            android:ems="10"
+            android:hint="@string/enter_your_name"
+            android:inputType="textPersonName" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/music_shop"
+                android:contentDescription="@string/music_shop_label" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/aclonica"
+                android:rotation="-20"
+                android:text="@string/sale_30"
+                android:textColor="@color/white"
+                android:textSize="28sp" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:text="@string/select_item"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/guitar"
+            android:contentDescription="@string/active_goods" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/textOrderPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:maxWidth="150dp"
+                android:maxHeight="150dp"
+                android:text="@string/order_price"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textOrderPrice"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/price"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/currency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textOrderPrice"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@id/textView3"
+                android:text="@string/currency"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/QuantityTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="40dp"
+                android:layout_marginStart="80dp"
+                android:textAlignment="viewEnd"
+                android:maxWidth="150dp"
+                android:maxHeight="150dp"
+                android:layout_toEndOf="@id/textOrderPrice"
+                android:text="@string/quantity"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/buttonPlus"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:onClick="@{viewModelOrder.order.increaseQuantity}"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:layout_below="@id/textOrderPrice"
+                android:text="@string/button_plus"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textOrderPrice"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="10dp"
+                android:layout_toStartOf="@id/buttonPlus"
+                android:text="@{String.valueOf(viewModelOrder.order.quantity)}"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/buttonMinus"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:onClick="@{viewModelOrder.order.decreaseQuantity}"
+                android:layout_below="@id/textOrderPrice"
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="10dp"
+                android:layout_toStartOf="@id/textView6"
+                android:text="@string/button_minus"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/buttonAddToCart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="@string/add_to_cart"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinner_items">
+        <item>Guitar</item>
+        <item>Drums</item>
+        <item>Keyboard</item>
+    </string-array>
+</resources>
