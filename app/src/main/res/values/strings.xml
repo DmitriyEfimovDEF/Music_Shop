@@ -9,6 +9,7 @@
     <string name="price" translatable="false">0</string>
     <string name="currency" translatable="false">$</string>
     <string name="quantity">Quantity</string>
+    <string name="quantityNumber" translatable="false">0</string>
     <string name="button_plus" translatable="false">+</string>
     <string name="total_price" translatable="false">0</string>
     <string name="button_minus" translatable="false">-</string>

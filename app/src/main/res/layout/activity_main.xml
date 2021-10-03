@@ -5,9 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
-            name="viewModelOrder"
-            type="com.friden.ru.musicshop.ViewModelOrder" />
+            name="mainActivity"
+            type="com.friden.ru.musicshop.MainActivity" />
+
+        <variable
+            name="viewModel"
+            type="com.friden.ru.musicshop.ViewModelMusicShop" />
     </data>
 
     <LinearLayout
@@ -22,6 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:autofillHints="name"
+            android:text="@={viewModel.userName}"
             android:ems="10"
             android:hint="@string/enter_your_name"
             android:inputType="textPersonName" />
@@ -35,9 +41,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginTop="10dp"
+                android:contentDescription="@string/music_shop_label"
                 android:scaleType="centerCrop"
-                app:srcCompat="@drawable/music_shop"
-                android:contentDescription="@string/music_shop_label" />
+                app:srcCompat="@drawable/music_shop" />
 
             <TextView
                 android:id="@+id/textView"
@@ -75,9 +81,9 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/active_goods"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/guitar"
-            android:contentDescription="@string/active_goods" />
+            app:srcCompat="@drawable/guitar" />
 
 
         <RelativeLayout
@@ -104,7 +110,7 @@
                 android:layout_below="@id/textOrderPrice"
                 android:layout_marginStart="35dp"
                 android:layout_marginTop="10dp"
-                android:text="@string/price"
+                android:text="@{String.valueOf(viewModel.totalPrice)}"
                 android:textColor="@color/black"
                 android:textSize="22sp"
                 android:textStyle="bold" />
@@ -127,13 +133,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="40dp"
                 android:layout_marginStart="80dp"
-                android:textAlignment="viewEnd"
+                android:layout_marginEnd="40dp"
+                android:layout_toEndOf="@id/textOrderPrice"
                 android:maxWidth="150dp"
                 android:maxHeight="150dp"
-                android:layout_toEndOf="@id/textOrderPrice"
                 android:text="@string/quantity"
+                android:textAlignment="viewEnd"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -142,22 +148,22 @@
                 android:id="@+id/buttonPlus"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:onClick="@{viewModelOrder.order.increaseQuantity}"
+                android:layout_below="@id/textOrderPrice"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="10dp"
-                android:layout_below="@id/textOrderPrice"
+                android:onClick="@{()->viewModel.increaseQuantity()}"
                 android:text="@string/button_plus"
                 android:textColor="@color/white" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/textViewQuantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textOrderPrice"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="10dp"
                 android:layout_toStartOf="@id/buttonPlus"
-                android:text="@{String.valueOf(viewModelOrder.order.quantity)}"
+                android:text="@{String.valueOf(viewModel.quantity)}"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -166,11 +172,11 @@
                 android:id="@+id/buttonMinus"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:onClick="@{viewModelOrder.order.decreaseQuantity}"
                 android:layout_below="@id/textOrderPrice"
                 android:layout_centerInParent="true"
                 android:layout_marginEnd="10dp"
-                android:layout_toStartOf="@id/textView6"
+                android:layout_toStartOf="@id/textViewQuantity"
+                android:onClick="@{()->viewModel.decreaseQuantity()}"
                 android:text="@string/button_minus"
                 android:textColor="@color/white" />
         </RelativeLayout>
@@ -181,6 +187,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:text="@string/add_to_cart"
+            android:onClick="@{() -> mainActivity.addToCart()}"
             android:textColor="@color/white" />
 
     </LinearLayout>
