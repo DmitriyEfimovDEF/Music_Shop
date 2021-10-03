@@ -9,27 +9,29 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import com.friden.ru.musicshop.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     private val goodsHashmap = HashMap<String, Double>()
-    lateinit var dataBinding: ActivityMainBinding
-    private val price: Double = 0.0
-    var quantity: Int = 0
+    private lateinit var dataBinding: ActivityMainBinding
     private val viewModelMusicShop by viewModels<ViewModelMusicShop>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         dataBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
         dataBinding.lifecycleOwner = this
         dataBinding.viewModel = viewModelMusicShop
-        createSpinner()
         createHashMap()
+        createSpinner()
+        observeData()
+    }
+
+    private fun observeData() = viewModelMusicShop.onAddToCartEvent.observe(this){
+        addToCart()
     }
 
     private fun createSpinner() {
@@ -43,45 +45,27 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         spinner.onItemSelectedListener = this
     }
 
-    private fun createHashMap() {
-        with(goodsHashmap) {
-            put("guitar", 500.0)
-            put("drums", 1500.0)
-            put("keyboard", 1000.0)
-        }
+    private fun createHashMap() = Goods.values().forEach {
+        goodsHashmap[it.text] = it.price
     }
 
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-        when (dataBinding.spinner.selectedItem.toString()) {
-            "Guitar" -> {
-                dataBinding.imageView2.setImageResource(R.drawable.guitar)
-                viewModelMusicShop._goodsName.value = "Guitar"
-                viewModelMusicShop.getOrderPrice()
-            }
-            "Drums" -> {
-                dataBinding.imageView2.setImageResource(R.drawable.drums)
-                viewModelMusicShop._goodsName.value = "Drums"
-                viewModelMusicShop.getOrderPrice()
-
-            }
-            "Keyboard" -> {
-                dataBinding.imageView2.setImageResource(R.drawable.keyboard)
-                viewModelMusicShop._goodsName.value = "Keyboard"
-                viewModelMusicShop.getOrderPrice()
-            }
+        Goods.values().find { it.text == dataBinding.spinner.selectedItem.toString() }?.let {
+            dataBinding.imageView2.setImageResource(it.iconDrawable)
+            viewModelMusicShop.updateGood(it)
         }
     }
 
     override fun onNothingSelected(p0: AdapterView<*>?) {
     }
 
-    fun addToCart() {
-        Log.d("TAG", "REaDY")
+    private fun addToCart() {
+        Log.d("~~~~TAG", "REaDY")
         val intent: Intent = Intent(this, OrderActivity::class.java).apply {
             putExtra("userName", viewModelMusicShop.userName)
             putExtra("goodsName", viewModelMusicShop.goodsName.value)
             putExtra("quantity", "${viewModelMusicShop.quantity.value}")
-            putExtra("price", viewModelMusicShop.price)
+            putExtra("price", viewModelMusicShop.goodsName.value?.price)
             putExtra("orderPrice", "${viewModelMusicShop.totalPrice.value}")
         }
         startActivity(intent)

@@ -7,10 +7,6 @@
     <data>
 
         <variable
-            name="mainActivity"
-            type="com.friden.ru.musicshop.MainActivity" />
-
-        <variable
             name="viewModel"
             type="com.friden.ru.musicshop.ViewModelMusicShop" />
     </data>
@@ -151,7 +147,7 @@
                 android:layout_below="@id/textOrderPrice"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="10dp"
-                android:onClick="@{()->viewModel.increaseQuantity()}"
+                android:onClick="@{() -> viewModel.increaseQuantity()}"
                 android:text="@string/button_plus"
                 android:textColor="@color/white" />
 
@@ -176,7 +172,7 @@
                 android:layout_centerInParent="true"
                 android:layout_marginEnd="10dp"
                 android:layout_toStartOf="@id/textViewQuantity"
-                android:onClick="@{()->viewModel.decreaseQuantity()}"
+                android:onClick="@{() -> viewModel.decreaseQuantity()}"
                 android:text="@string/button_minus"
                 android:textColor="@color/white" />
         </RelativeLayout>
@@ -187,7 +183,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:text="@string/add_to_cart"
-            android:onClick="@{() -> mainActivity.addToCart()}"
+            android:onClick="@{() -> viewModel.addToCart()}"
             android:textColor="@color/white" />
 
     </LinearLayout>
